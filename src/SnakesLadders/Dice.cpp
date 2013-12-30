@@ -25,6 +25,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "Dice.h"
 
 
+Dice * Dice::_dice = (Dice*)0;
+
+
 Dice::Dice():
     _face(0),
     _count(0),
@@ -38,9 +41,40 @@ Dice::~Dice()
 }
 
 
+Dice * Dice::get()
+{
+    if ( !_dice )
+        _dice = new Dice();
+    return _dice;
+}
+
+
+void Dice::put()
+{
+    if ( _dice ) { // just to avoid double deletes
+        delete _dice;
+        _dice = (Dice*)0;
+    }
+}
+
+
 size_t Dice::roll()
 {
-    return _range( _generator );
+    _face = _range( _generator );
+    _count++;
+    return _face;
+}
+
+
+size_t Dice::face() const
+{
+    return _face;
+}
+
+
+size_t Dice::count() const
+{
+    return _count;
 }
 
 

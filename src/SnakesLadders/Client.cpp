@@ -36,10 +36,14 @@ using std::endl;
 
 int main()
 {
-    Dice d;
+    Dice * d = Dice::get();
     for ( size_t i = 0; i < 1000; ++i )
-        cout << d.roll() << " ";
+        cout << d->roll() << " ";
     cout << endl;
+    cout << d->face() << endl;
+    cout << d->count() << endl;
+
+    d->put();
 
     print("Press any key to continue...");
     cin.get();
