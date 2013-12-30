@@ -22,52 +22,41 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 
-#include <iostream>
-#include "Dice.h"
 #include "Player.h"
 
 
-using std::cout;
-using std::cin;
-using std::endl;
-
-
-#define print(s) cout<<endl<<(s)<<endl
-
-
-void Test_Dice()
+Player::Player():
+    _position(0)
 {
-    Dice * d = Dice::get();
-    for ( size_t i = 0; i < 1000; ++i )
-        cout << d->roll() << " ";
-    cout << endl;
-    cout << d->face() << endl;
-    cout << d->count() << endl;
-
-    d->put();
 }
 
 
-void Test_Player()
+Player::~Player()
 {
-    Player p1, p2;
-
-    size_t face = p1.getDice()->roll();
-    p1.move(face);
-    
-    face = p2.getDice()->roll();
-    p2.move(face);
 }
 
 
-int main()
+void Player::move(size_t count)
 {
-    Test_Dice();
-    Test_Player();
+    _position += count;
+}
 
-    print("Press any key to continue...");
-    cin.get();
-    return 0;
+
+void Player::moveTo(size_t position)
+{
+    _position = position;
+}
+
+
+bool Player::hasWon() const
+{
+    return (_position >= 100);
+}
+
+
+Dice * Player::getDice() const
+{
+    return Dice::get();
 }
 
 

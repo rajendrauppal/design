@@ -22,53 +22,30 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 
-#include <iostream>
+#ifndef Player_INCLUDED
+#define Player_INCLUDED
+
+
 #include "Dice.h"
-#include "Player.h"
 
 
-using std::cout;
-using std::cin;
-using std::endl;
-
-
-#define print(s) cout<<endl<<(s)<<endl
-
-
-void Test_Dice()
+class Player
 {
-    Dice * d = Dice::get();
-    for ( size_t i = 0; i < 1000; ++i )
-        cout << d->roll() << " ";
-    cout << endl;
-    cout << d->face() << endl;
-    cout << d->count() << endl;
+public:
+    Player();
+    ~Player();
 
-    d->put();
-}
+    void move(size_t count);
+    void moveTo(size_t position);
+    bool hasWon() const;
+    Dice * getDice() const;
 
+private:
+    size_t _position;
 
-void Test_Player()
-{
-    Player p1, p2;
-
-    size_t face = p1.getDice()->roll();
-    p1.move(face);
-    
-    face = p2.getDice()->roll();
-    p2.move(face);
-}
+    Player(const Player&);
+    Player& operator = (const Player&);
+};
 
 
-int main()
-{
-    Test_Dice();
-    Test_Player();
-
-    print("Press any key to continue...");
-    cin.get();
-    return 0;
-}
-
-
-// ~EOF
+#endif // Player_INCLUDED
