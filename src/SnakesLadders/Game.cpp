@@ -55,4 +55,40 @@ void Game::releaseInstance()
 }
 
 
+void Game::setBoard(size_t size)
+{
+    _board = Board::getBoard( size );
+}
+
+
+void Game::setPlayer(string name)
+{
+    Player * player = new Player( name );
+    _players.push_back( player );
+}
+
+
+string Game::getWinner() const
+{
+    string ans;
+    Players::const_iterator start = _players.begin();
+    Players::const_iterator end = _players.end();
+
+    while ( start != end ) {
+        if ( (*start)->hasWon() ) {
+            ans = (*start)->getName();
+            break;
+        }
+        ++start;
+    }
+
+    return ans;
+}
+
+
+void Game::play()
+{
+}
+
+
 // ~EOF

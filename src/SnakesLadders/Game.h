@@ -34,10 +34,17 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 class Game
 {
 public:
-    typedef vector<Player> Players;
+    typedef vector<Player*> Players;
 
     static Game * getInstance();
     static void releaseInstance();
+
+    void setBoard(size_t size);
+    void setPlayer(string name);
+
+    string getWinner() const;
+
+    void play();
 
 private:
     static Game * _game;

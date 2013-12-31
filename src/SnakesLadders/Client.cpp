@@ -73,7 +73,12 @@ void Test_Board()
 void Test_Game()
 {
     Game * game = Game::getInstance();
-    
+    game->setBoard( 8 ); // allowed sizes are 8x8, 10x10 and 12x12 at present.
+    game->setPlayer( "Rajendra" );
+    game->setPlayer( "Deepak" );
+    game->play();
+    string winnerName = game->getWinner();
+    cout << "Congratulations " << winnerName << ", You've won!" << endl;
 }
 
 
