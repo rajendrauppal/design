@@ -22,39 +22,43 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 
-#include "Board.h"
+#ifndef GameData_INCLUDED
+#define GameData_INCLUDED
 
 
-Board * Board::_board = (Board*)0;
+#include <map>
+#include <vector>
 
 
-Board::Board(size_t size)
+class GameData
 {
-    _snakes = GameData::getInstance()->getSnakes(size);
-    _ladders = GameData::getInstance()->getLadders(size);
-}
+public:
+    typedef std::map<size_t, std::vector<std::pair<size_t, size_t> > > SnakesMap;
+    typedef std::map<size_t, std::vector<std::pair<size_t, size_t> > > LaddersMap;
+    typedef std::vector<std::pair<size_t, size_t> > Snakes;
+    typedef std::vector<std::pair<size_t, size_t> > Ladders;
+    typedef std::pair<size_t, size_t> Snake;
+    typedef std::pair<size_t, size_t> Ladder;
+
+    static GameData * getInstance();
+    static void releaseInstance();
+
+    static Snakes& getSnakes(size_t size);
+    static Ladders& getLadders(size_t size);
+
+private:
+    static GameData * _gamedata;
+
+    static SnakesMap _snakesMap;
+    static LaddersMap _laddersMap;
+    static Snakes _snakes;
+    static Ladders _ladders;
+
+    GameData();
+    ~GameData();
+    GameData(const GameData&);
+    GameData& operator = (const GameData&);
+};
 
 
-Board::~Board()
-{
-}
-
-
-Board * Board::getBoard(size_t size)
-{
-    if ( !_board )
-        _board = new Board(size);
-    return _board;
-}
-
-
-void Board::releaseBoard()
-{
-    if ( _board ) {
-        delete _board;
-        _board = (Board*)0;
-    }
-}
-
-
-// ~EOF
+#endif // GameData_INCLUDED

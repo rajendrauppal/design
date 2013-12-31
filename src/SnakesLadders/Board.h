@@ -26,30 +26,26 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define Board_INCLUDED
 
 
+#include "GameData.h"
+#include <vector>
+
+
+using std::vector;
+using std::pair;
+
+
 class Board
 {
 public:
-    enum BoardSize
-    {
-        EIGHT,
-        TEN,
-        TWELVE
-    };
-
-    static Board * getBoard(BoardSize bs);
+    static Board * getBoard(size_t size);
     static void releaseBoard();
 
 private:
-    struct Cell
-    {
-        size_t _row;
-        size_t _col;
-    };
-
-    Cell _cells;
     static Board * _board;
+    GameData::Snakes _snakes;
+    GameData::Ladders _ladders;
 
-    explicit Board(BoardSize bs);
+    explicit Board(size_t size);
     ~Board();
     Board(const Board&);
     Board& operator = (const Board&);

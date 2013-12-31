@@ -63,7 +63,9 @@ void Test_Player()
 
 void Test_Board()
 {
-    Board * board = Board::getBoard(Board::TEN);
+    Board * board = Board::getBoard(8);
+    Board::releaseBoard();
+    cout << board << endl;
 }
 
 
