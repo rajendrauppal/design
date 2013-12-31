@@ -22,60 +22,37 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 
-#include <iostream>
-#include "Dice.h"
-#include "Player.h"
 #include "Board.h"
 
 
-using std::cout;
-using std::cin;
-using std::endl;
+Board * Board::_board = (Board*)0;
 
 
-#define print(s) cout<<endl<<(s)<<endl
-
-
-void Test_Dice()
-{
-    Dice * d = Dice::get();
-    for ( size_t i = 0; i < 1000; ++i )
-        cout << d->roll() << " ";
-    cout << endl;
-    cout << d->face() << endl;
-    cout << d->count() << endl;
-
-    d->put();
-}
-
-
-void Test_Player()
-{
-    Player p1, p2;
-
-    size_t face = p1.getDice()->roll();
-    p1.move(face);
+Board::Board(BoardSize bs):
     
-    face = p2.getDice()->roll();
-    p2.move(face);
+{
 }
 
 
-void Test_Board()
+Board::~Board()
 {
-    Board * board = Board::getBoard(Board::TEN);
 }
 
 
-int main()
+Board * Board::getBoard(BoardSize bs)
 {
-    Test_Dice();
-    Test_Player();
-    Test_Board();
+    if ( !_board )
+        _board = new Board(bs);
+    return _board;
+}
 
-    print("Press any key to continue...");
-    cin.get();
-    return 0;
+
+void Board::releaseBoard()
+{
+    if ( _board ) {
+        delete _board;
+        _board = (Board*)0;
+    }
 }
 
 
