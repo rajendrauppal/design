@@ -23,6 +23,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 #include "GameData.h"
+#include <algorithm>
 
 
 using std::vector;
@@ -139,6 +140,66 @@ GameData::Ladders& GameData::getLadders(size_t size)
 {
     _ladders = _laddersMap[size];
     return _ladders;
+}
+
+
+bool GameData::isSnakeMouth(size_t pos) const
+{
+    Snakes::const_iterator start = _snakes.begin();
+    Snakes::const_iterator end = _snakes.end();
+    
+    while ( start != end ) {
+        if ( (*start).first == pos )
+            return true;
+        start++;
+    }
+
+    return false;
+}
+
+
+bool GameData::isLadderTail(size_t pos) const
+{
+    Ladders::const_iterator start = _ladders.begin();
+    Ladders::const_iterator end = _ladders.end();
+    
+    while ( start != end ) {
+        if ( (*start).first == pos )
+            return true;
+        start++;
+    }
+
+    return false;
+}
+
+
+size_t GameData::getSnakeTail(size_t pos) const
+{
+    Snakes::const_iterator start = _snakes.begin();
+    Snakes::const_iterator end = _snakes.end();
+    
+    while ( start != end ) {
+        if ( (*start).first == pos )
+            return (*start).second;
+        start++;
+    }
+
+    return 0;
+}
+
+
+size_t GameData::getLadderHead(size_t pos) const
+{
+    Ladders::const_iterator start = _ladders.begin();
+    Ladders::const_iterator end = _ladders.end();
+    
+    while ( start != end ) {
+        if ( (*start).first == pos )
+            return (*start).second;
+        start++;
+    }
+
+    return 0;
 }
 
 

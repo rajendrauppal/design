@@ -22,49 +22,35 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 
-#ifndef GameData_INCLUDED
-#define GameData_INCLUDED
+#ifndef Game_INCLUDED
+#define Game_INCLUDED
 
 
-#include <map>
-#include <vector>
+#include "Board.h"
+#include "Dice.h"
+#include "Player.h"
 
 
-class GameData
+class Game
 {
 public:
-    typedef std::map<size_t, std::vector<std::pair<size_t, size_t> > > SnakesMap;
-    typedef std::map<size_t, std::vector<std::pair<size_t, size_t> > > LaddersMap;
-    typedef std::vector<std::pair<size_t, size_t> > Snakes;
-    typedef std::vector<std::pair<size_t, size_t> > Ladders;
-    typedef std::pair<size_t, size_t> Snake;
-    typedef std::pair<size_t, size_t> Ladder;
+    typedef vector<Player> Players;
 
-    static GameData * getInstance();
+    static Game * getInstance();
     static void releaseInstance();
 
-    static Snakes& getSnakes(size_t size);
-    static Ladders& getLadders(size_t size);
-
-    bool isSnakeMouth(size_t pos) const;
-    bool isLadderTail(size_t pos) const;
-
-    size_t getSnakeTail(size_t pos) const;
-    size_t getLadderHead(size_t pos) const;
-
 private:
-    static GameData * _gamedata;
+    static Game * _game;
 
-    static SnakesMap _snakesMap;
-    static LaddersMap _laddersMap;
-    static Snakes _snakes;
-    static Ladders _ladders;
+    Board * _board;
+    Dice * _dice;
+    Players _players;
 
-    GameData();
-    ~GameData();
-    GameData(const GameData&);
-    GameData& operator = (const GameData&);
+    Game();
+    ~Game();
+    Game(const Game&);
+    Game& operator = (const Game&);
 };
 
 
-#endif // GameData_INCLUDED
+#endif // Game_INCLUDED

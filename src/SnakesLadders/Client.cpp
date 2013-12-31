@@ -26,6 +26,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "Dice.h"
 #include "Player.h"
 #include "Board.h"
+#include "Game.h"
 
 
 using std::cout;
@@ -69,11 +70,20 @@ void Test_Board()
 }
 
 
+void Test_Game()
+{
+    Game * game = Game::getInstance();
+    
+}
+
+
 int main()
 {
     Test_Dice();
     Test_Player();
     Test_Board();
+
+    Test_Game();
 
     print("Press any key to continue...");
     cin.get();

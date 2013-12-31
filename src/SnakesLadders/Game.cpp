@@ -22,38 +22,37 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 
-#ifndef Player_INCLUDED
-#define Player_INCLUDED
+#include "Game.h"
 
 
-#include "Dice.h"
-#include <string>
+Game * Game::_game = (Game*)0;
 
 
-using std::string;
-
-
-class Player
+Game::Game()
 {
-public:
-    Player();
-    Player(string name);
-    ~Player();
-
-    void move(size_t count);
-    void moveTo(size_t position);
-    bool hasWon() const;
-    Dice * getDice() const;
-
-    string getName() const;
-
-private:
-    size_t _position;
-    string _name;
-
-    Player(const Player&);
-    Player& operator = (const Player&);
-};
+}
 
 
-#endif // Player_INCLUDED
+Game::~Game()
+{
+}
+
+
+Game * Game::getInstance()
+{
+    if ( !_game )
+        _game = new Game();
+    return _game;
+}
+
+
+void Game::releaseInstance()
+{
+    if ( _game ) { // just to avoid double deletes
+        delete _game;
+        _game = (Game*)0;
+    }
+}
+
+
+// ~EOF

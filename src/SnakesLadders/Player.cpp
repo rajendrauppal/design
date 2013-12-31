@@ -26,7 +26,15 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 Player::Player():
-    _position(0)
+    _position(0),
+    _name("")
+{
+}
+
+
+Player::Player(string name):
+    _position(0),
+    _name( name )
 {
 }
 
@@ -57,6 +65,12 @@ bool Player::hasWon() const
 Dice * Player::getDice() const
 {
     return Dice::get();
+}
+
+
+string Player::getName() const
+{
+    return _name;
 }
 
 
