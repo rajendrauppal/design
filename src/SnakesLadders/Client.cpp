@@ -23,9 +23,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 #include <iostream>
-#include "Dice.h"
-#include "Player.h"
-#include "Board.h"
 #include "Game.h"
 
 
@@ -37,39 +34,6 @@ using std::endl;
 #define print(s) cout<<endl<<(s)<<endl
 
 
-void Test_Dice()
-{
-    Dice * d = Dice::get();
-    for ( size_t i = 0; i < 1000; ++i )
-        cout << d->roll() << " ";
-    cout << endl;
-    cout << d->face() << endl;
-    cout << d->count() << endl;
-
-    d->put();
-}
-
-
-void Test_Player()
-{
-    Player p1, p2;
-
-    size_t face = p1.getDice()->roll();
-    p1.move(face);
-    
-    face = p2.getDice()->roll();
-    p2.move(face);
-}
-
-
-void Test_Board()
-{
-    Board * board = Board::getBoard(8);
-    Board::releaseBoard();
-    cout << board << endl;
-}
-
-
 void Test_Game()
 {
     Game * game = Game::getInstance();
@@ -78,22 +42,18 @@ void Test_Game()
     game->setPlayer( "Deepak" );
     game->play();
     string winnerName = game->getWinner();
-    cout << "Congratulations " << winnerName << ", You've won!" << endl;
+    if ( !winnerName.empty() )
+        cout << "Congratulations " << winnerName << ", You've won!" << endl;
 }
 
 
 int main()
 {
-    Test_Dice();
-    Test_Player();
-    Test_Board();
-
     Test_Game();
 
     print("Press any key to continue...");
     cin.get();
     return 0;
 }
-
 
 // ~EOF

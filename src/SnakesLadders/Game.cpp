@@ -22,7 +22,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 
+#include <iostream>
 #include "Game.h"
+
+
+using std::cout;
+using std::endl;
 
 
 Game * Game::_game = (Game*)0;
@@ -88,7 +93,27 @@ string Game::getWinner() const
 
 void Game::play()
 {
+    Player * first = toss();
+    cout << "First player to start: " << first->getName() << endl;
+
 }
 
+
+Player * Game::toss() const
+{
+    Players::const_iterator start = _players.begin();
+    Players::const_iterator end = _players.end();
+
+    while ( true ) {
+        for ( ; start != end; ++start ) {
+            size_t face = (*start)->getDice()->roll();
+            if ( 6 == face )
+                return (*start);
+        }
+        start = _players.begin();
+    }
+
+    return (Player*)0;
+}
 
 // ~EOF

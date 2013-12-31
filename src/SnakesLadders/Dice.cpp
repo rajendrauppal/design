@@ -23,6 +23,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 #include "Dice.h"
+#include <cstdlib>
+#include <ctime>
 
 
 Dice * Dice::_dice = (Dice*)0;
@@ -30,7 +32,6 @@ Dice * Dice::_dice = (Dice*)0;
 
 Dice::Dice():
     _face(0),
-    _count(0),
     _range(1, 6)
 {
 }
@@ -60,8 +61,8 @@ void Dice::put()
 
 size_t Dice::roll()
 {
-    _face = _range( _generator );
-    _count++;
+    srand( time(NULL) );
+    _face = (rand() % 6) + 1;
     return _face;
 }
 
@@ -69,12 +70,6 @@ size_t Dice::roll()
 size_t Dice::face() const
 {
     return _face;
-}
-
-
-size_t Dice::count() const
-{
-    return _count;
 }
 
 

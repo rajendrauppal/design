@@ -36,12 +36,10 @@ public:
     static void put();
     size_t roll();
     size_t face() const;
-    size_t count() const;
 
 private:
     static Dice * _dice;
     size_t _face;
-    size_t _count;
     
     std::default_random_engine _generator;
     std::uniform_int_distribution<size_t> _range;

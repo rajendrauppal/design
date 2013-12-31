@@ -57,6 +57,8 @@ private:
     ~Game();
     Game(const Game&);
     Game& operator = (const Game&);
+
+    Player * toss() const;
 };
 
 
