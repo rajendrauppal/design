@@ -23,6 +23,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 #include <iostream>
+#include <Windows.h>
 #include "Game.h"
 
 
@@ -104,7 +105,7 @@ void Game::play()
 
     while ( true ) {
         for ( ; start != end; ++start ) {
-            cout << "Now playing: " << (*start)->getName() << endl;
+            string name = (*start)->getName();
             size_t newpos = (*start)->getDice()->roll();
             size_t sixcount = 0;
 
@@ -114,16 +115,22 @@ void Game::play()
                     newpos = (*start)->getDice()->roll();
                     ++sixcount;
                 }
-                if ( 3 == sixcount )
+                if ( 3 == sixcount ) {
+                    cout << endl << name << " got 3 sixes, resetting position..." << endl;
                     (*start)->reset();
+                }
             }
             else {
                 (*start)->move( newpos );
             }
+            cout << name << " at " << (*start)->getCurrentPosition() << "\t";
 
             if ( (*start)->hasWon() )
                 return;
+
+            //Sleep( 1000 );
         }
+        cout << endl << endl;
         start = _players.begin();
     }
 }

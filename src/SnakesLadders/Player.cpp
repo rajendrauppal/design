@@ -90,4 +90,10 @@ string Player::getName() const
 }
 
 
+size_t Player::getCurrentPosition() const
+{
+    return _position;
+}
+
+
 // ~EOF

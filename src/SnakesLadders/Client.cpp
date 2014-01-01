@@ -43,7 +43,7 @@ void Test_Game()
     game->play();
     string winnerName = game->getWinner();
     if ( !winnerName.empty() )
-        cout << "Congratulations " << winnerName << ", You've won!" << endl;
+        cout << endl << endl << "Congratulations " << winnerName << ", You've won!" << endl;
 }
 
 

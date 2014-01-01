@@ -46,6 +46,7 @@ public:
     Dice * getDice() const;
 
     string getName() const;
+    size_t getCurrentPosition() const;
 
 private:
     size_t _position;
