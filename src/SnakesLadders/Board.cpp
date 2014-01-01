@@ -26,12 +26,14 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 Board * Board::_board = (Board*)0;
+size_t Board::_size = 0;
 
 
 Board::Board(size_t size)
 {
     _snakes = GameData::getInstance()->getSnakes(size);
     _ladders = GameData::getInstance()->getLadders(size);
+    _size = size;
 }
 
 
@@ -54,6 +56,12 @@ void Board::releaseBoard()
         delete _board;
         _board = (Board*)0;
     }
+}
+
+
+size_t Board::getBoardSize()
+{
+    return _size;
 }
 
 

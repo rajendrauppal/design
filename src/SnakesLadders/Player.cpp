@@ -23,19 +23,26 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 #include "Player.h"
+#include "Board.h"
 
 
 Player::Player():
     _position(0),
-    _name("")
+    _name(""),
+    _reset(false),
+    _winner(false)
 {
+    _boardsize = Board::getBoardSize();
 }
 
 
 Player::Player(string name):
     _position(0),
-    _name( name )
+    _name(name),
+    _reset(false),
+    _winner(false)
 {
+    _boardsize = Board::getBoardSize();
 }
 
 
@@ -47,6 +54,8 @@ Player::~Player()
 void Player::move(size_t count)
 {
     _position += count;
+    if ( _position >= (_boardsize * _boardsize) )
+        _winner = true;
 }
 
 
@@ -56,9 +65,16 @@ void Player::moveTo(size_t position)
 }
 
 
+void Player::reset()
+{
+    _position = 1;
+    _reset = true;
+}
+
+
 bool Player::hasWon() const
 {
-    return (_position >= 100);
+    return _winner;
 }
 
 

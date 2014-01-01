@@ -41,7 +41,7 @@ public:
     ~Player();
 
     void move(size_t count);
-    void moveTo(size_t position);
+    void reset();
     bool hasWon() const;
     Dice * getDice() const;
 
@@ -50,9 +50,14 @@ public:
 private:
     size_t _position;
     string _name;
+    bool _reset;
+    bool _winner;
+    size_t _boardsize;
 
     Player(const Player&);
     Player& operator = (const Player&);
+
+    void moveTo(size_t position);
 };
 
 

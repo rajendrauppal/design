@@ -61,7 +61,7 @@ void Dice::put()
 
 size_t Dice::roll()
 {
-    srand( time(NULL) );
+    srand( (unsigned int)time(NULL) );
     _face = (rand() % 6) + 1;
     return _face;
 }

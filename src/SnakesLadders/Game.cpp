@@ -96,6 +96,36 @@ void Game::play()
     Player * first = toss();
     cout << "First player to start: " << first->getName() << endl;
 
+    Players::const_iterator start = _players.begin();
+    Players::const_iterator end = _players.end();
+
+    while ( (*start) != first )
+        start++;
+
+    while ( true ) {
+        for ( ; start != end; ++start ) {
+            cout << "Now playing: " << (*start)->getName() << endl;
+            size_t newpos = (*start)->getDice()->roll();
+            size_t sixcount = 0;
+
+            if ( 6 == newpos ) {
+                while ( (6 == newpos) && (3 != sixcount) ) {
+                    (*start)->move( newpos );
+                    newpos = (*start)->getDice()->roll();
+                    ++sixcount;
+                }
+                if ( 3 == sixcount )
+                    (*start)->reset();
+            }
+            else {
+                (*start)->move( newpos );
+            }
+
+            if ( (*start)->hasWon() )
+                return;
+        }
+        start = _players.begin();
+    }
 }
 
 

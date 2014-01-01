@@ -40,10 +40,13 @@ public:
     static Board * getBoard(size_t size);
     static void releaseBoard();
 
+    static size_t getBoardSize();
+
 private:
     static Board * _board;
     GameData::Snakes _snakes;
     GameData::Ladders _ladders;
+    static size_t _size;
 
     explicit Board(size_t size);
     ~Board();
