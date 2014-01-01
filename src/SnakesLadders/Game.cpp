@@ -41,6 +41,13 @@ Game::Game()
 
 Game::~Game()
 {
+    Players::iterator start = _players.begin();
+    for ( ; start != _players.end(); ++start ) {
+        delete (*start);
+        (*start) = (Player*)0;
+    }
+
+    _players.clear();
 }
 
 
@@ -58,6 +65,7 @@ void Game::releaseInstance()
         delete _game;
         _game = (Game*)0;
     }
+    Board::releaseBoard();
 }
 
 
@@ -103,32 +111,37 @@ void Game::play()
     while ( (*start) != first )
         start++;
 
-    while ( true ) {
-        for ( ; start != end; ++start ) {
+    while ( true ) 
+    {
+        for ( ; start != end; ++start ) 
+        {
+            if ( (*start)->hasWon() )
+                return;
+
             string name = (*start)->getName();
             size_t newpos = (*start)->getDice()->roll();
             size_t sixcount = 0;
 
-            if ( 6 == newpos ) {
-                while ( (6 == newpos) && (3 != sixcount) ) {
+            if ( 6 == newpos ) 
+            {
+                while ( (6 == newpos) && (3 != sixcount) ) 
+                {
                     (*start)->move( newpos );
                     newpos = (*start)->getDice()->roll();
                     ++sixcount;
                 }
-                if ( 3 == sixcount ) {
+                if ( 3 == sixcount ) 
+                {
                     cout << endl << name << " got 3 sixes, resetting position..." << endl;
                     (*start)->reset();
                 }
             }
-            else {
+            else
+            {
                 (*start)->move( newpos );
             }
-            cout << name << " at " << (*start)->getCurrentPosition() << "\t";
-
-            if ( (*start)->hasWon() )
-                return;
-
-            //Sleep( 1000 );
+            cout << name << ": " << (*start)->getCurrentPosition() << "\t";
+            Sleep( 1000 );
         }
         cout << endl << endl;
         start = _players.begin();

@@ -39,6 +39,7 @@ Board::Board(size_t size)
 
 Board::~Board()
 {
+    GameData::releaseInstance();
 }
 
 

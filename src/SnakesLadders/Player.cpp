@@ -25,6 +25,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "Player.h"
 #include "Board.h"
 #include "GameData.h"
+#include <iostream>
+
+
+using std::cout;
+using std::endl;
 
 
 Player::Player():
@@ -56,16 +61,18 @@ void Player::move(size_t count)
 {
     size_t candidate_pos = _position + count;
 
-    if ( GameData::isSnakeMouth( candidate_pos ) )
+    if ( GameData::isSnakeMouth( candidate_pos ) ) {
         _position = GameData::getSnakeTail( candidate_pos );
-    
-    else if ( GameData::isLadderTail( candidate_pos ) )
+        cout << endl << getName() << " got Snake bite!!! going down to... " << _position << endl;
+    }
+    else if ( GameData::isLadderTail( candidate_pos ) ) {
         _position = GameData::getLadderHead( candidate_pos );
-    
+        cout << endl << getName() << " hit Ladder!!! going up to... " << _position << endl;
+    }
     else
         _position += count;
 
-    // see if this player is winning by current move.
+    // see if 'this' player is winning by current move.
     if ( _position >= (_boardsize * _boardsize) )
         _winner = true;
 }

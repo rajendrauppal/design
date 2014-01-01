@@ -34,22 +34,36 @@ using std::endl;
 #define print(s) cout<<endl<<(s)<<endl
 
 
-void Test_Game()
+void Test_Game(size_t size)
 {
+    cout << "---------------------" << endl;
+    cout << "Testing game size: " << size << endl;
+    cout << "---------------------" << endl;
+
     Game * game = Game::getInstance();
-    game->setBoard( 8 ); // allowed sizes are 8x8, 10x10 and 12x12 at present.
-    game->setPlayer( "Rajendra" );
-    game->setPlayer( "Deepak" );
+    game->setBoard( size ); // allowed sizes are 8x8, 10x10 and 12x12 at present.
+    game->setPlayer( "A" );
+    game->setPlayer( "B" );
+    
     game->play();
+    
     string winnerName = game->getWinner();
     if ( !winnerName.empty() )
         cout << endl << endl << "Congratulations " << winnerName << ", You've won!" << endl;
+    
+    Game::releaseInstance();
+
+    cout << "-------------------------" << endl;
+    cout << "End testing game size: " << size << endl;
+    cout << "-------------------------" << endl;
 }
 
 
 int main()
 {
-    Test_Game();
+    Test_Game(8);
+    Test_Game(10);
+    Test_Game(12);
 
     print("Press any key to continue...");
     cin.get();

@@ -109,6 +109,10 @@ GameData::GameData()
 
 GameData::~GameData()
 {
+    _snakes.clear();
+    _ladders.clear();
+    _snakesMap.clear();
+    _laddersMap.clear();
 }
 
 
