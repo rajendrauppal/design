@@ -57,8 +57,6 @@ private:
 
     Player(const Player&);
     Player& operator = (const Player&);
-
-    void moveTo(size_t position);
 };
 
 

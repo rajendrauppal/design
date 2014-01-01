@@ -24,6 +24,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include "Player.h"
 #include "Board.h"
+#include "GameData.h"
 
 
 Player::Player():
@@ -53,15 +54,20 @@ Player::~Player()
 
 void Player::move(size_t count)
 {
-    _position += count;
+    size_t candidate_pos = _position + count;
+
+    if ( GameData::isSnakeMouth( candidate_pos ) )
+        _position = GameData::getSnakeTail( candidate_pos );
+    
+    else if ( GameData::isLadderTail( candidate_pos ) )
+        _position = GameData::getLadderHead( candidate_pos );
+    
+    else
+        _position += count;
+
+    // see if this player is winning by current move.
     if ( _position >= (_boardsize * _boardsize) )
         _winner = true;
-}
-
-
-void Player::moveTo(size_t position)
-{
-    _position = position;
 }
 
 

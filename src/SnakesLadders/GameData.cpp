@@ -143,7 +143,7 @@ GameData::Ladders& GameData::getLadders(size_t size)
 }
 
 
-bool GameData::isSnakeMouth(size_t pos) const
+bool GameData::isSnakeMouth(size_t pos)
 {
     Snakes::const_iterator start = _snakes.begin();
     Snakes::const_iterator end = _snakes.end();
@@ -158,7 +158,7 @@ bool GameData::isSnakeMouth(size_t pos) const
 }
 
 
-bool GameData::isLadderTail(size_t pos) const
+bool GameData::isLadderTail(size_t pos)
 {
     Ladders::const_iterator start = _ladders.begin();
     Ladders::const_iterator end = _ladders.end();
@@ -173,7 +173,7 @@ bool GameData::isLadderTail(size_t pos) const
 }
 
 
-size_t GameData::getSnakeTail(size_t pos) const
+size_t GameData::getSnakeTail(size_t pos)
 {
     Snakes::const_iterator start = _snakes.begin();
     Snakes::const_iterator end = _snakes.end();
@@ -188,7 +188,7 @@ size_t GameData::getSnakeTail(size_t pos) const
 }
 
 
-size_t GameData::getLadderHead(size_t pos) const
+size_t GameData::getLadderHead(size_t pos)
 {
     Ladders::const_iterator start = _ladders.begin();
     Ladders::const_iterator end = _ladders.end();

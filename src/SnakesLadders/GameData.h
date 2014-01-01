@@ -46,11 +46,11 @@ public:
     static Snakes& getSnakes(size_t size);
     static Ladders& getLadders(size_t size);
 
-    bool isSnakeMouth(size_t pos) const;
-    bool isLadderTail(size_t pos) const;
+    static bool isSnakeMouth(size_t pos);
+    static bool isLadderTail(size_t pos);
 
-    size_t getSnakeTail(size_t pos) const;
-    size_t getLadderHead(size_t pos) const;
+    static size_t getSnakeTail(size_t pos);
+    static size_t getLadderHead(size_t pos);
 
 private:
     static GameData * _gamedata;
